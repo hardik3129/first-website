@@ -15,7 +15,8 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          The following is a rudimentary example of using React for the web, written in JSX and JavaScript.
+          
+          Look at this circle and get hypnotized
         </a>
       </header>
     </div>
