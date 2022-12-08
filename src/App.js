@@ -16,7 +16,7 @@ function App() {
           rel="noopener noreferrer"
         >
           
-          Look at this circle and get hypnotized
+          RUSHABH SUTARIYA
         </a>
       </header>
     </div>
