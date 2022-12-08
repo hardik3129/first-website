@@ -15,8 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          
-          Look at this circle and get hypnotized
+          THIS CONTENT IS NEW BRANCH
         </a>
       </header>
     </div>
