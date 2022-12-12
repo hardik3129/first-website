@@ -35,11 +35,14 @@ function App() {
         </a>
       </header>
       {data.map((i) => {
-        return (<div key={Math.random()}>
+        return <div key={Math.random()}>
+          <br></br>
           element id {i.id}
+          <br></br>
+          element Title {i.title}
+          <br></br>
           element no. {Math.floor(Math.random()*1000)}
-          {console.log(i)}
-        </div>)
+        </div>
       })}
     </div>
   );
