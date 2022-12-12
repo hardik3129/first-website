@@ -35,9 +35,12 @@ function App() {
         </a>
       </header>
       {data.map((i) => {
+        function copy_path() {
+          navigator.clipboard.writeText(i.id);
+        } 
         return <div key={Math.random()}>
           <br></br>
-          element id {i.id}
+          element id {i.id} <button onClick={copy_path}>Copy id</button>
           <br></br>
           element Title {i.title}
           <br></br>
