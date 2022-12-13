@@ -16,6 +16,10 @@ function App() {
   //   }
   //   let d = new student("hardik",Math.floor(Math.random()*1000)).bus();
   // }
+
+  function copy_path(i) {
+    navigator.clipboard.writeText(i.id);
+  } 
   
   return (
     <div className="App">
@@ -31,22 +35,25 @@ function App() {
           rel="noopener noreferrer"
         >
           
-          RUSHABH SUTARIYA
+          RUSHABH SUTARIYA  
         </a>
       </header>
-      {data.map((i) => {
-        function copy_path() {
-          navigator.clipboard.writeText(i.id);
-        } 
-        return <div key={Math.random()}>
-          <br></br>
-          element id {i.id} <button onClick={copy_path}>Copy id</button>
-          <br></br>
-          element Title {i.title}
-          <br></br>
-          element no. {Math.floor(Math.random()*1000)}
-        </div>
-      })}
+      <table>
+        <tbody>
+          <tr>
+            <td>Element id</td>
+            <td>Title</td>
+            <td>no.</td>
+          </tr>
+          {data.map((i) => {
+            return <tr key={Math.random()}>
+                  <td>{i.id} <button onClick={() => copy_path(i)}>Copy id</button></td>
+                  <td>{i.title}</td>
+                  <td>{Math.floor(Math.random()*1000)}</td>
+                </tr>
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
