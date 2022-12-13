@@ -17,6 +17,43 @@ function App() {
   //   let d = new student("hardik",Math.floor(Math.random()*1000)).bus();
   // }
 
+  let array1 = [
+    {
+      id: "555",
+      title: "post title 555",
+      desc: "This is a test desc 555"
+    },
+    {
+      id: "666",
+      title: "post title 666",
+      desc: "This is a test desc 666"
+    },
+    {
+      id: "777",
+      title: "post title 777",
+      desc: "This is a test desc 777"
+    }
+  ];
+  let array2 = [
+    {
+      id: "888",
+      title: "post title 888",
+      desc: "This is a test desc 888"
+    },
+    {
+      id: "999",
+      title: "post title 999",
+      desc: "This is a test desc 999"
+    },
+    {
+      id: "000",
+      title: "post title 000",
+      desc: "This is a test desc 000"
+    }
+  ];
+
+  let array = [...array1,...array2];
+
   function copy_path(i) {
     navigator.clipboard.writeText(i.id);
   } 
@@ -45,7 +82,7 @@ function App() {
             <td>Title</td>
             <td>no.</td>
           </tr>
-          {data.map((i) => {
+          {array.map((i) => {
             return <tr key={Math.random()}>
                   <td>{i.id} <button onClick={() => copy_path(i)}>Copy id</button></td>
                   <td>{i.title}</td>
