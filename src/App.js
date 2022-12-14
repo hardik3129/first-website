@@ -19,7 +19,50 @@ function App() {
 
   function copy_path(i) {
     navigator.clipboard.writeText(i.id);
-  } 
+  }
+  let array3 = [
+    {
+      id: 555,
+      title: "post title 555",
+      desc: "This is a test desc 555"
+    },
+    {
+      id: 666,
+      title: "post title 666",
+      desc: "This is a test desc 666"
+    },
+    {
+      id: 777,
+      title: "post title 777",
+      desc: "This is a test desc 777"
+    },
+    {
+      id: 888,
+      title: "post title 888",
+      desc: "This is a test desc 888"
+    },
+    {
+      id: 999,
+      title: "post title 999",
+      desc: "This is a test desc 999"
+    },
+    {
+      id: 444,
+      title: "post title 000",
+      desc: "This is a test desc 000"
+    }
+  ];
+  
+  // Reduse :- 
+  let sum = 0;
+  for (let i of array3) {
+    sum += i.id;
+  }
+  console.log(sum);
+  const total = array3.reduce((a , curant) => {
+    return a + curant.id;
+  },0);
+  console.log(total);
   
   return (
     <div className="App">
@@ -35,7 +78,7 @@ function App() {
           rel="noopener noreferrer"
         >
           
-          RUSHABH SUTARIYA  
+          HARDIK CHAUHAN
         </a>
       </header>
       <table>
