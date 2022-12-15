@@ -20,7 +20,9 @@ function App() {
   function copy_path(i) {
     navigator.clipboard.writeText(i.id);
   }
-  let array3 = [
+
+  // Destructuring  :- 
+  let [arr555,arr666,arr777,...alldata] = [
     {
       id: 555,
       title: "post title 555",
@@ -48,21 +50,14 @@ function App() {
     },
     {
       id: 444,
-      title: "post title 000",
-      desc: "This is a test desc 000"
+      title: "post title 444",
+      desc: "This is a test desc 444"
     }
   ];
-  
-  // Reduse :- 
-  let sum = 0;
-  for (let i of array3) {
-    sum += i.id;
-  }
-  console.log(sum);
-  const total = array3.reduce((a , curant) => {
-    return a + curant.id;
-  },0);
-  console.log(total);
+  console.log(arr555);
+  alldata.map((i) => {
+    console.log(i.desc);
+  });
   
   return (
     <div className="App">
