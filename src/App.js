@@ -1,7 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import data from './data.json'
 
 function App() {
+  
+  let chek = data.filter((i) => i.id === 555)
+  chek.map((i) => {
+    return console.log(i);
+  });
+
+  let loot = data.filter((i) => i.title === "post title 444");
+  loot.map((i) => {
+    return console.log(loot);
+  })
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +28,7 @@ function App() {
           rel="noopener noreferrer"
         >
           
-          RUSHABH SUTARIYA
+        HARDIK CHAUHAN
         </a>
       </header>
     </div>
