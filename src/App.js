@@ -1,6 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import data from './data.json'
+import Header from './pages/header'
+import About from './pages/about.js'
 
 function App() {
   
@@ -16,39 +17,27 @@ function App() {
   //   }
   //   let d = new student("hardik",Math.floor(Math.random()*1000)).bus();
   // }
-  
+  function copy_path(i) {
+    navigator.clipboard.writeText(i.id);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          
-          RUSHABH SUTARIYA
-        </a>
-      </header>
+    <>
+      <Header data1={data} name="admin1"/>
+      <About />
       {data.map((i) => {
-        function copy_path() {
-          navigator.clipboard.writeText(i.id);
-        } 
-        return <div key={Math.random()}>
-          <br></br>
-          element id {i.id} <button onClick={copy_path}>Copy id</button>
-          <br></br>
-          element Title {i.title}
-          <br></br>
-          element no. {Math.floor(Math.random()*1000)}
-        </div>
+            return (
+              <div key={Math.random()}>
+                <br></br>
+                element id {i.id} <button onClick={() => copy_path(i)}>Copy id</button>
+                <br></br>
+                element Title {i.title}
+                <br></br>
+                element no. {Math.floor(Math.random()*1000)}
+              </div>
+            )
       })}
-    </div>
-  );
+    </>
+  )
 }
 
 export default App;
