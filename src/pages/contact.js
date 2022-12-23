@@ -1,16 +1,10 @@
 import React from 'react'
 
-function contact({newcnt}) {
+
+const contact = () => {
   return (
     <div>
-        <h2>Hardik Chauhan</h2>
-        {
-            newcnt.map((i) => {
-                return (
-                    <p key={Math.random()}>{i.name}</p>
-                )
-            })
-        }
+      
     </div>
   )
 }

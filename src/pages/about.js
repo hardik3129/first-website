@@ -1,28 +1,15 @@
-import React from "react"
-import Contact from './contact.js'
-
-function about({employ}) {
-    const newdata = [
-        {
-          name : "hardik",
-          email : "hardik@gmail.com"
-        },
-        {
-          name : "mayur",
-          email : "mayur@gmail.com"
-        },
-        {
-          name : "milan",
-          email : "milan@gmail.com"
-        },
-    ]
-    console.log(employ);
-    return (
-        <>
-            <Contact newcnt={newdata}/>
-            <h1>About</h1>
-        </>
-    )
+import React from 'react'
+import Header from './header'
+const about = (props) => {
+  
+  return (
+    <div>
+      <h1>This is First Object data {props.value[0].name}</h1>
+      <h1>This is First Object data {props.value[1].name}</h1>
+      <h1>This is First Object data {props.value[2].name}</h1>
+      <Header Head={props.value} />
+    </div>
+  )
 }
 
-export default about;
+export default about

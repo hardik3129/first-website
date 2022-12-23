@@ -1,42 +1,42 @@
+import { useState } from 'react';
 import './App.css';
-import data from './data.json'
-import Header from './pages/header'
-import About from './pages/about.js'
 
 function App() {
-  
-  // function clickevent () {
-  //   class student {
-  //     constructor (name,id) {
-  //       this.name = name
-  //       this.id = id
-  //     }
-  //     bus () {
-  //       console.log(`${this.name} and ${this.id}`);
-  //     }
-  //   }
-  //   let d = new student("hardik",Math.floor(Math.random()*1000)).bus();
-  // }
-  function copy_path(i) {
-    navigator.clipboard.writeText(i.id);
+  const emp = [
+    {
+      name : "hardik1",
+      email : "hardik1@gmail.com"
+    },
+    {
+      name : "mayur2",
+      email : "mayur2@gmail.com"
+    },
+    {
+      name : "milan3",
+      email : "milan3@gmail.com"
+    }
+  ]
+
+  const [student, setStudent] = useState(emp);
+
+  let onClickChange = () => {
+    let data = student.map((i) => ({...i, name : "blank"}))
+    console.log(data);
+    setStudent(data);
   }
+
   return (
-    <>
-      <Header data1={data} name="admin1"/>
-      <About />
-      {data.map((i) => {
+      <div className='App'>
+        hooks
+        {
+          student.map((i) => {
             return (
-              <div key={Math.random()}>
-                <br></br>
-                element id {i.id} <button onClick={() => copy_path(i)}>Copy id</button>
-                <br></br>
-                element Title {i.title}
-                <br></br>
-                element no. {Math.floor(Math.random()*1000)}
-              </div>
+              <p key={Math.random()}>name is {i.name}</p>
             )
-      })}
-    </>
+          })
+        }
+        <button onClick={onClickChange}>Change</button>
+      </div>
   )
 }
 
