@@ -67,10 +67,11 @@ export default class App extends Component {
       valid : true,
       name : "hardik"
     }
-    this.props = {
-      email : "dkfndkf@gmail.com"
-    }
     console.log(this.state.cnt);
+  }
+
+  onclickhandler = () => {
+    this.setState({cnt : this.state.cnt + 1})
   }
   
   render() {
