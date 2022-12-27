@@ -20,7 +20,12 @@ function App() {
   const [student, setStudent] = useState(emp);
 
   let onClickChange = () => {
-    let data = student.map((i) => ({...i, name : "blank"}))
+    let data = student.map((i,ind) => {
+      if (ind === 0) {
+        i.name = i.name ? "blank" : "hardik"
+      }
+      return i
+    })
     console.log(data);
     setStudent(data);
   }
