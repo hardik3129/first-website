@@ -37,8 +37,7 @@
 
 // export default App
 
-import userEvent from '@testing-library/user-event';
-import React, { useEffect, useState, useSyncExternalStore } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function App() {
 
@@ -56,16 +55,18 @@ function App() {
   ]
   const [val, setval] = useState(data)
   useEffect(() => {
-    setval(
-      val.map((i,ind) => {
-        if (ind === 0) {
-          i.name = "Hardik Chauhan"
-        }
-        return i
-      })
-    )
+    // First run
     return () => {
-      // alert("are you sure to leave this page");
+      // Last run
+      setval(
+        val.map((i,ind) => {
+          if (ind === 1) {
+            i.name = "Rushabh Shutariya"
+          }
+          return i
+        })
+      )
+      alert("you sure this leave this page")
     }
   },[])
 
