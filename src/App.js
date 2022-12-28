@@ -1,86 +1,99 @@
-// import { useState } from 'react';
-// import './App.css';
+// import React, { Component } from 'react'
 
-// function App() {
-//   const emp = [
-//     {
-//       name : "hardik1",
-//       email : "hardik1@gmail.com"
-//     },
-//     {
-//       name : "mayur2",
-//       email : "mayur2@gmail.com"
-//     },
-//     {
-//       name : "milan3",
-//       email : "milan3@gmail.com"
+// class App extends Component {
+
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       count : 1,
+//       valid : true
 //     }
-//   ]
-
-//   const [student, setStudent] = useState(emp);
-  
-//   let changeData = () => {
-//     let g = 
-//       student.map((i,index) => 
-//           {
-//             if (index === 0) {
-//               i.name = "blank"
-//             }
-//             return i
-//           }
-//       )
-    
-//     console.log(g);
-//     setStudent(g)
 //   }
 
-//   return (
-//       <div className='App'>
-//         Life cycle
-//         {student.map((i) => {
-//           return (
-//             <div key={Math.random()}>
-//               name is {i.name}
-//             </div>
-//           )
-//         })}
-//         <button onClick={changeData}>Change</button>
+//   componentWillMount() {
+//     this.setState({count : this.state.count + 1})
+//   }
+
+//   componentDidUpdate(prevProps, prevstate) {
+//     if (prevstate.count !== this.state.count) {
+//       this.setState({valid : this.state.valid ? false : true})
+//     }
+//   }
+  
+//   sub = () => {
+//     this.setState({count : this.state.count + 1})
+//   }
+  
+//   render() {
+//     return (
+//       <div>
+//         count is {this.state.count} <br />
+//         valid is {this.state.valid ? "yes" : "no"}
+//         <button onClick={this.sub}>submit</button>
 //       </div>
-//   )
+//     )
+//   }
 // }
 
-// export default App;
+// export default App
 
-import React, { Component } from 'react'
-import './App.css'
+import userEvent from '@testing-library/user-event';
+import React, { useEffect, useState, useSyncExternalStore } from 'react'
 
-export default class App extends Component {
-  
-  componentWillMount() {
-    this.setState({cnt : this.state.cnt + 1})
-  }
-  
-  constructor () {
-    super();
-    this.state = {
-      cnt : 0,
-      valid : true,
-      name : "hardik"
+function App() {
+
+  let data = [
+    {
+      name : "hardik",
+      couunt : 0,
+      valid : true
+    },
+    {
+      name : "rushabh",
+      couunt : 5,
+      valid : false
     }
-    console.log(this.state.cnt);
-  }
+  ]
+  const [val, setval] = useState(data)
+  useEffect(() => {
+    setval(
+      val.map((i,ind) => {
+        if (ind === 0) {
+          i.name = "Hardik Chauhan"
+        }
+        return i
+      })
+    )
+    return () => {
+      // alert("are you sure to leave this page");
+    }
+  },[])
 
-  onclickhandler = () => {
-    this.setState({cnt : this.state.cnt + 1})
-  }
-  
-  render() {
-    console.log(this);
-    return (
-      <div className='App'>
-        {this.state.cnt}
-        <button onClick={this.onclickhandler}>submit</button>
-      </div>
+  let updatedata = () => {
+    setval(
+      val.map((i,ind) => {
+        if (ind === 0) {
+          i.name = "Hardik"
+        }
+        return i
+      })
     )
   }
+  
+  return (
+    <div>
+      {val.map((i) => {
+        return ( 
+          <div key={Math.random()}>
+            name is  {i.name} <br/>
+            count is {i.couunt} <br/>
+            valid is {i.valid ? "yes" : "no"} <br/>
+          </div>
+        )
+      })}
+      <button onClick={updatedata}>Submit</button>
+    </div>
+  )
 }
+
+export default App
