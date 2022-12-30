@@ -1,45 +1,56 @@
-// import React, { Component } from 'react'
+import React, { Component,useEffect, useState } from 'react'
 
-// class App extends Component {
+class App extends Component {
 
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       count : 1,
-//       valid : true
-//     }
-//   }
+  constructor(props) {
+    super(props)
+    this.state = {
+      count : 1,
+      valid : true
+    }
+  }
 
-//   componentWillMount() {
-//     this.setState({count : this.state.count + 1})
-//   }
+  componentWillMount() {
+    this.setState({count : this.state.count + 1})
+  }
 
-//   componentDidUpdate(prevProps, prevstate) {
-//     if (prevstate.count !== this.state.count) {
-//       this.setState({valid : this.state.valid ? false : true})
-//     }
-//   }
+  componentDidUpdate(prevProps, prevstate) {
+    if (prevstate.count !== this.state.count) {
+      this.setState({valid : this.state.valid ? false : true})
+    }
+  }
   
-//   sub = () => {
-//     this.setState({count : this.state.count + 1})
-//   }
+  sub = () => {
+    this.setState({count : this.state.count + 1})
+  }
   
-//   render() {
-//     return (
-//       <div>
-//         count is {this.state.count} <br />
-//         valid is {this.state.valid ? "yes" : "no"}
-//         <button onClick={this.sub}>submit</button>
-//       </div>
-//     )
-//   }
-// }
+  render() {
+    return (
+      <div style={{backgroundColor:'green'}}>
+        <h2>Function Component</h2>
+        <FunRed Cnt={Function}/>
+        <br/>
+        <h2>Class Component</h2>
+        count is {this.state.count} <br />
+        valid is {this.state.valid ? "yes" : "no"}
+        <button onClick={this.sub}>submit</button>
+      </div>
+    )
+  }
+}
 
-// export default App
+export default App
 
-import React, { useEffect, useState } from 'react'
+const FunRed = (props) => {
 
-function App() {
+  return (
+    <div style={{backgroundColor : 'red'}}>
+      <props.Cnt />
+    </div>
+  )
+}
+
+function Function() {
 
   let data = [
     {
@@ -54,21 +65,27 @@ function App() {
     }
   ]
   const [val, setval] = useState(data)
+
   useEffect(() => {
+    setval(
+      val.map((i,ind) => {
+        if (ind === 1) {
+          i.name = "Rushabh Shutariya"
+        }
+        return i
+      })
+    )
     // First run
     return () => {
       // Last run
-      setval(
-        val.map((i,ind) => {
-          if (ind === 1) {
-            i.name = "Rushabh Shutariya"
-          }
-          return i
-        })
-      )
-      alert("you sure this leave this page")
     }
   },[])
+
+  useEffect(() => {
+    return () => {
+      console.info(val)
+    }
+  },[val])
 
   let updatedata = () => {
     setval(
@@ -96,5 +113,3 @@ function App() {
     </div>
   )
 }
-
-export default App
