@@ -1,21 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import './App.css'
+// import React, { useState } from 'react'
+// import './App.css'
+// import Clock from './pages/clock'
 
-const App = () => {
+// const App = () => {
 
-  const [time, settime] = useState(new Date().toLocaleTimeString())
+//   const [time, settime] = useState(null)
 
-  useEffect(() => {
-    setInterval(() => {
-      settime(new Date().toLocaleTimeString())
-    }, 1000);
-  },[])
+//   setInterval(() => {
+//     settime(new Date().toLocaleTimeString())
+//   }, 1000);
   
-  return (
-    <div>
-      {time}
-    </div>
-  )
+//   return (
+//     <div>
+//       {time}
+//     </div>
+//   )
+// }
+
+// export default App
+
+import React, { Component } from 'react'
+
+class clock extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      clk : null
+    }
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({clk : new Date().toLocaleTimeString()})
+    }, 1000);
+  }
+    
+  render() {
+    return (
+      <div>
+        {this.state.clk}
+      </div>
+    )
+  }
 }
 
-export default App
+export default clock
