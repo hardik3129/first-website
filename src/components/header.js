@@ -31,9 +31,9 @@ const header = () => {
                 <ul>
                     <li><Link className="nav-link scrollto active" to="/">Home</Link></li>
                     <li><Link className="nav-link scrollto" to="/departments">Departments</Link></li>
-                    <li><a className="nav-link scrollto" href="./pages/doctors.html">Doctors</a></li>
+                    <li><Link className="nav-link scrollto" to={"/contact"}>Contact</Link></li>
                     <li><a className="nav-link scrollto " href="./pages/about.html">About</a></li>
-                    <li><a className="nav-link scrollto" href="./pages/contact.html">Contact</a></li>
+                    <li><a className="nav-link scrollto" href="./pages/contact.html">Docter</a></li>
                 </ul>
                 <i className="bi bi-list mobile-nav-toggle" />
                 </nav>

@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const home = () => {
+const Home = () => {
+    const [ data, setdata ] = useState()
+    
+    const onChangename = (event) => {
+        console.log("change : ",event.target.value);
+        setdata(event.target.value)
+    }
+    
+    const onClickchang = () => {
+        console.log("state hook : ",data);
+    }
+    
   return (
     <div>
         <section id="hero" className="d-flex align-items-center">
@@ -45,6 +56,11 @@ const home = () => {
                 </div>
                 </div>
             </div>
+            </section>
+            {/* =================== EVENT ==================== */}
+            <section>
+                <input placeholder='enter name' onChange={onChangename} />
+                <button type='submit' onClick={onClickchang}>Submit</button>
             </section>
             <section id="services" className="services">
             <div className="container">
@@ -266,4 +282,4 @@ const home = () => {
   )
 }
 
-export default home
+export default Home
