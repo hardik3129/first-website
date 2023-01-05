@@ -1,24 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './App.css'
 
 function App() {
 
-  const [count, setcount] = useState(0)
-  const changePlush = () => {
-    if (count < 5) {
-      setcount(count + 1)
+  const [Count, setCount] = useState(0)
+  useEffect(() => {
+    console.log("mounting = ",Count);
+    return () => {
+      console.log("unmounting = ",Count)
     }
+  },[Count])
+
+  let changePlush = () => {
+    setCount(Count + 1)
   }
   const changeMinus = () => {
-    if (count > 0) {
-      setcount(count - 1)
+    if (Count > 0) {
+      setCount(Count - 1)
     }
   }
   
   return (
     <div className="App">
       <button onClick={changeMinus}>-</button>
-      {count}
+      {Count}
       <button onClick={changePlush}>+</button>
     </div>
   );
