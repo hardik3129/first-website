@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
+import "../App.css"
 
 const Home = () => {
     const [ data, setdata ] = useState()
+    const Refrens = useRef()
     
     const onChangename = (event) => {
         console.log("change : ",event.target.value);
@@ -10,6 +12,7 @@ const Home = () => {
     
     const onClickchang = () => {
         console.log("state hook : ",data);
+        console.log(Refrens.current.placeholder);
     }
     
   return (
@@ -59,7 +62,7 @@ const Home = () => {
             </section>
             {/* =================== EVENT ==================== */}
             <section>
-                <input placeholder='enter name' onChange={onChangename} />
+                <input ref={Refrens} id="place" placeholder='enter name' onChange={onChangename} />
                 <button type='submit' onClick={onClickchang}>Submit</button>
             </section>
             <section id="services" className="services">
