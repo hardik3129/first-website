@@ -1,85 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
-import data from './data.json'
+import React from 'react'
+import Data from './data.json'
 
-function App() {
-  
-  // function clickevent () {
-  //   class student {
-  //     constructor (name,id) {
-  //       this.name = name
-  //       this.id = id
-  //     }
-  //     bus () {
-  //       console.log(`${this.name} and ${this.id}`);
-  //     }
-  //   }
-  //   let d = new student("hardik",Math.floor(Math.random()*1000)).bus();
-  // }
+const App = () => {
 
-  let array1 = [
-    {
-      id: "555",
-      title: "post title 555",
-      desc: "This is a test desc 555"
-    },
-    {
-      id: "666",
-      title: "post title 666",
-      desc: "This is a test desc 666"
-    },
-    {
-      id: "777",
-      title: "post title 777",
-      desc: "This is a test desc 777"
-    }
-  ];
-  let array2 = [
-    {
-      id: "888",
-      title: "post title 888",
-      desc: "This is a test desc 888"
-    },
-    {
-      id: "999",
-      title: "post title 999",
-      desc: "This is a test desc 999"
-    },
-    {
-      id: "000",
-      title: "post title 000",
-      desc: "This is a test desc 000"
-    }
-  ];
+  const total = Data.items.reduce((a , curant) => {
+    return a + curant.quantity;
+  },0);
 
-              // spread opreter
-              //      |
-  let array = [...array1,...array2];
-
-  function copy_path(i) {
-    navigator.clipboard.writeText(i.id);
-  } 
+  const totalPrice = Data.items.reduce((a , curant) => {
+    return a + curant.price;
+  },0);
   
   return (
-    <div className="App">
-      <table>
+    <div>
+      <table border={1}>
         <tbody>
-          <tr>
-            <td>Element id</td>
-            <td>Title</td>
-            <td>no.</td>
-          </tr>
-          {array.map((i) => {
-            return <tr key={Math.random()}>
-                  <td>{i.id} <button onClick={() => copy_path(i)}>Copy id</button></td>
-                  <td>{i.title}</td>
-                  <td>{Math.floor(Math.random()*1000)}</td>
+        <tr>
+          <td>id</td>
+          <td>name</td>
+          <td>quantity</td>
+          <td>price</td>
+          <td colSpan={2}>options</td>
+        </tr>
+        {
+          Data.items.map((i) => {
+            return(
+                <tr key={Math.random()}>
+                  <td>{i.id}</td>
+                  <td>{i.name}</td>
+                  <td>{i.quantity}</td>
+                  <td>{i.price}</td>
+                  {/* <td> */}
+                    {i.options.map((j) => {
+                        return( 
+                          <td key={Math.random()}>{j.color }{j.size} </td>
+                        )
+                    })}
+                  {/* </td> */}
                 </tr>
-          })}
+            )
+          })
+        }    
+        <tr>
+          <td></td>
+          <td></td>
+          <td>{total}</td>
+          <td>{totalPrice}</td>
+          <td colSpan={2}></td>
+        </tr>
         </tbody>
       </table>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
