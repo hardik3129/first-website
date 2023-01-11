@@ -30,13 +30,11 @@ const App = () => {
                   <td>{i.name}</td>
                   <td>{i.quantity}</td>
                   <td>{i.price}</td>
-                  {/* <td> */}
-                    {i.options.map((j) => {
-                        return( 
-                          <td key={Math.random()}>{j.color }{j.size} </td>
-                        )
-                    })}
-                  {/* </td> */}
+                  {i.options.map((j) => {
+                      return( 
+                        <td key={Math.random()}>{j.color }{j.size} </td>
+                      )
+                  })}
                 </tr>
             )
           })
