@@ -4,6 +4,39 @@ import "../App.css"
 const Home = () => {
     const [ data, setdata ] = useState()
     const Refrens = useRef()
+
+    const Facilities = [
+        {
+            icon : <i className="fas fa-hospital-alt" />,
+            title : "24x7 Emergency Available",
+            desc : "Nullam accumsan, velit et porta consequat, purus leo congue risus"
+        },
+        {
+            icon : <i className="fas fa-bed" />,
+            title : "40+ Bed Facilities",
+            desc : "Pellentesque id felis elit. Pellentesque blandit sem a nisi dictum"
+        },
+        {
+            icon : <i className="fas fa-hospital-user" />,
+            title : "Cardiogram Machine",
+            desc : "Donec lacinia finibus tortor. Curabitur luctus eleifend odio."
+        },
+        {
+            icon : <i className="fas fa-dna" />,
+            title : "X-ray and Sonography",
+            desc : "Aliquam auctor felis ut sem elementum, ac rutrum turpis venenatis."
+        },
+        {
+            icon : <i className="fas fa-wheelchair" />,
+            title : "Semi Special, Special and Delux Room Available",
+            desc : "Etiam in massa eu neque euismod consectetur."
+        },
+        {
+            icon : <i className="fas fa-notes-medical" />,
+            title : "Medical",
+            desc : "Morbi vulputate, tortor nec pellentesque molestie"
+        }
+    ]
     
     const onChangename = (event) => {
         console.log("change : ",event.target.value);
@@ -74,48 +107,19 @@ const Home = () => {
                     suscipit pulvinar. Donec quis tristique lectus.</p>
                 </div>
                 <div className="row">
-                <div className="col-lg-4 col-md-6 d-flex align-items-stretch">
-                    <div className="icon-box">
-                    <div className="icon"><i className="fas fa-hospital-alt" /></div>
-                    <h4><a href>24x7 Emergency Available</a></h4>
-                    <p>Nullam accumsan, velit et porta consequat, purus leo congue risus</p>
-                    </div>
-                </div>
-                <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-                    <div className="icon-box">
-                    <div className="icon"><i className="fas fa-bed" /></div>
-                    <h4><a href>40+ Bed Facilities</a></h4>
-                    <p>Pellentesque id felis elit. Pellentesque blandit sem a nisi dictum</p>
-                    </div>
-                </div>
-                <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-                    <div className="icon-box">
-                    <div className="icon"><i className="fas fa-hospital-user" /></div>
-                    <h4><a href>Cardiogram Machine</a></h4>
-                    <p>Donec lacinia finibus tortor. Curabitur luctus eleifend odio.</p>
-                    </div>
-                </div>
-                <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div className="icon-box">
-                    <div className="icon"><i className="fas fa-dna" /></div>
-                    <h4><a href>X-ray and Sonography</a></h4>
-                    <p>Aliquam auctor felis ut sem elementum, ac rutrum turpis venenatis.</p>
-                    </div>
-                </div>
-                <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div className="icon-box">
-                    <div className="icon"><i className="fas fa-wheelchair" /></div>
-                    <h4><a href>Semi Special, Special and Delux Room Available</a></h4>
-                    <p>Etiam in massa eu neque euismod consectetur.</p>
-                    </div>
-                </div>
-                <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-                    <div className="icon-box">
-                    <div className="icon"><i className="fas fa-notes-medical" /></div>
-                    <h4><a href>Medical</a></h4>
-                    <p>Morbi vulputate, tortor nec pellentesque molestie</p>
-                    </div>
-                </div>
+                    {
+                        Facilities.map((i) => {
+                            return(
+                                <div className="col-lg-4 col-md-6 d-flex mt-3 mb-2">
+                                    <div className="icon-box">
+                                    <div className="icon">{i.icon}</div>
+                                    <h4><a href>{i.title}</a></h4>
+                                    <p>{i.desc}</p>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
             </section>

@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Contact = () => {
 
-    const onChangesubmit = (event) => {
-        event.preventDefault()
-        console.log("data :-",event.target);
+    const [name,setname] = useState('')
+    const [email,setemail] = useState('')
+    const [subject,setsubject] = useState('')
+    const [message,setmessage] = useState('')
+
+    const onChangename = (event) => {
+        setname(event.target.value)
+    }
+    const onChangeemail = (event) => {
+        setemail(event.target.value)
+    }
+    const onChangesubject = (event) => {
+        setsubject(event.target.value)
+    }
+    const onChangemessage = (event) => {
+        setmessage(event.target.value)
+    }
+
+    const Onsubmit = () => {
+        console.log("name :- ",name);
+        console.log("email :- ",email);
+        console.log("subject :- ",subject);
+        console.log("message :- ",message);
     }
     
   return (
@@ -40,27 +60,27 @@ const Contact = () => {
                 </div>
                 </div>
                 <div className="col-lg-8 mt-5 mt-lg-0">
-                <form onSubmit={onChangesubmit} className="php-email-form">
+                <form className="php-email-form">
                     <div className="row">
                     <div className="col-md-6 form-group">
-                        <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required />
+                        <input type="text" name="name" className="form-control" value={name} onChange={onChangename} id="name" placeholder="Your Name" required />
                     </div>
                     <div className="col-md-6 form-group mt-3 mt-md-0">
-                        <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" required />
+                        <input type="email" className="form-control" value={email} onChange={onChangeemail} name="email" id="email" placeholder="Your Email" required />
                     </div>
                     </div>
                     <div className="form-group mt-3">
-                    <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required />
+                    <input type="text" className="form-control" value={subject} onChange={onChangesubject} name="subject" id="subject" placeholder="Subject" required />
                     </div>
                     <div className="form-group mt-3">
-                    <textarea className="form-control" name="message" rows={5} placeholder="Message" required defaultValue={""} />
+                    <textarea className="form-control" value={message} onChange={onChangemessage} name="message" rows={5} placeholder="Message" required defaultValue={""} />
                     </div>
                     <div className="my-3">
                     <div className="loading">Loading</div>
                     <div className="error-message" />
                     <div className="sent-message">Your message has been sent. Thank you!</div>
                     </div>
-                    <div className="text-center"><button type="submit">Send Message</button></div>
+                    <div className="text-center"><button type="button" onClick={Onsubmit}>Send Message</button></div>
                 </form>
                 </div>
             </div>
