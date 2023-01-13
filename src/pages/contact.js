@@ -4,7 +4,11 @@ const Contact = () => {
 
     const onChangesubmit = (event) => {
         event.preventDefault()
-        console.log("data :-",event.target);
+        const {target} = event
+        console.log("name :- ",target.name.value);
+        console.log("email :- ",target.email.value);
+        console.log("subject :- ",target.subject.value);
+        console.log("message :- ",target.message.value);
     }
     
   return (
