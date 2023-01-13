@@ -19,12 +19,14 @@ const Contact = () => {
     const onChangemessage = (event) => {
         setmessage(event.target.value)
     }
-
     const Onsubmit = () => {
-        console.log("name :- ",name);
-        console.log("email :- ",email);
-        console.log("subject :- ",subject);
-        console.log("message :- ",message);
+        let obj = {
+            name : name,
+            email : email,
+            subject : subject,
+            message : message
+        }
+        console.log(obj);
     }
     
   return (
