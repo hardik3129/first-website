@@ -5,6 +5,7 @@ import Departments from "./pages/departments";
 import Head_foot from './layouts/header_footer'
 import Context from "./pages/contact";
 import Login from "./pages/Login";
+import './App.css'
 
 function App() {
   return (
