@@ -3,16 +3,16 @@ import React from 'react'
 import * as yup from 'yup'
 
 const Login = () => {
+
+    const n = yup.object().shape({
+        email: yup.string().email().required(),
+        password: yup.string().min(8).required()
+    })
     
   return (
     <Formik
         initialValues={{ email:'', password:'' }}
-        validationSchema={
-            yup.object().shape({
-                email: yup.string().email().required(),
-                password: yup.string().min(8).required()
-            })
-        }
+        validationSchema={n}
         onSubmit = {(value) => {
             alert(JSON.stringify(value, null, 2))
         }}
