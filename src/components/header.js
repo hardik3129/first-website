@@ -32,13 +32,12 @@ const header = () => {
                     <li><Link className="nav-link scrollto active" to="/">Home</Link></li>
                     <li><Link className="nav-link scrollto" to="/departments">Departments</Link></li>
                     <li><Link className="nav-link scrollto" to={"/contact"}>Contact</Link></li>
-                    <li><a className="nav-link scrollto " href="./pages/about.html">About</a></li>
-                    <li><a className="nav-link scrollto" href="./pages/contact.html">Docter</a></li>
+                    <li><Link className="nav-link scrollto" to={'/docRegister'}>Docter Register</Link></li>
                 </ul>
                 <i className="bi bi-list mobile-nav-toggle" />
                 </nav>
-                <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
-                Appointment</a>
+                <Link to='/appoinment' className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
+                Appointment</Link>
                 <Link to='/login' className="appointment-btn scrollto">
                 <span className="d-none d-md-inline">Login/ Signup</span>
                 </Link>

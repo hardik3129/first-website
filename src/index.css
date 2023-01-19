@@ -23,3 +23,9 @@ input::-webkit-inner-spin-button{
 input::placeholder{
   font-size: 14px;
 }
+button{
+  border: none;
+}
+a{
+  text-decoration: none !important;
+}
