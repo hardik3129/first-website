@@ -25,8 +25,8 @@ const Login = () => {
         {(props) => (
             <Form>
                 {console.log(props.values)}
-                <div className='d-flex justify-content-center vh-100 align-items-center col-12'>
-                    <div className="form-group">
+                <div className='d-flex justify-content-center vh-100 align-items-center'>
+                    <div className="form-group col-3">
                         <h2 className='text-center mb-4'>Login</h2>
                         <h6>email</h6>
                         <div className='mb-4'>
