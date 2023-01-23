@@ -31,6 +31,7 @@ const header = () => {
                 <ul>
                     <li><Link className="nav-link scrollto active" to="/">Home</Link></li>
                     <li><Link className="nav-link scrollto" to="/departments">Departments</Link></li>
+                    <li><Link className="nav-link scrollto" to="/medicine">Medicine</Link></li>
                     <li><Link className="nav-link scrollto" to={"/contact"}>Contact</Link></li>
                     <li><Link className="nav-link scrollto" to={'/docRegister'}>Docter Register</Link></li>
                 </ul>
