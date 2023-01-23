@@ -29,3 +29,8 @@ button{
 a{
   text-decoration: none !important;
 }
+.product-card {
+  border: 1px solid #dce0ea;
+  padding: 10px;
+  border-radius: 10px;
+}
