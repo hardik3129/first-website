@@ -10,6 +10,7 @@ const Docter_register = () => {
   return (
     <div>
       <h1>Docter Register</h1>
+      {/* ======================= FILE INPUT =================== */}
       <Formik
         initialValues={{
           empDoc: ''
