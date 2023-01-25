@@ -6,7 +6,7 @@ import 'yup-phone'
 const Appoinment = () => {
 
     let date = new Date().toLocaleDateString();
-    const validate = yup.object().shape({
+    const validate = yup.object().shape({   
         name: yup.string().matches(/^[aA-zZ\s]+$/,"Only alphabets are allowed for this field ").required(),
         email: yup.string().email().required(),
         age: yup.number().min(18).max(68).required(),
