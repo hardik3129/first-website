@@ -18,7 +18,11 @@ const Medicine = () => {
         return i.id !== id
       })
       setMedicineList(FilterData)
-      localStorage.setItem('MedicineData',JSON.stringify(FilterData))
+      localStorage.setItem('medicineData',JSON.stringify(FilterData))
+    }
+
+    const OnClickEdit = () => {
+
     }
     
   return (
@@ -42,7 +46,8 @@ const Medicine = () => {
                     <td>{i.price}</td>
                     <td>{i.quantity}</td>
                     <td>
-                      <button className='btn btn-danger' onClick={() => OnClickDelete(i.id)}>Delete</button>
+                      <button className='btn btn-danger me-3' onClick={() => OnClickDelete(i.id)}>Delete</button>
+                      <button className='btn btn-success' onClick={() => OnClickEdit(i.id)}>Edit</button>
                     </td>
                   </tr>
                 )
