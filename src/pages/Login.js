@@ -1,13 +1,23 @@
 import { Field, Form, Formik, ErrorMessage } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import * as yup from 'yup'
 import 'yup-phone'
 
 const Login = () => {
 
+    const [passwordType, setpasswordType] = useState('password')
+
+    const OnchangePassword = () => {
+        if(passwordType === 'password') {
+            return setpasswordType('text')
+        }
+        setpasswordType('password')
+    }
+
     const validate = yup.object().shape({
         email: yup.string().email().required(),
-        password: yup.string().min(8).required(),
+        password: yup.string().required('Please Enter your password').min(8).matches(/[0-9]/,"Enter One Number").matches("^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]",
+        "One Uppercase, One Lowercase and one special case Character"),
         age: yup.number().min(18).max(68).required(),
         phone: yup.string().phone().required(),
         Gender: yup.string().required(),
@@ -36,12 +46,15 @@ const Login = () => {
                         </div>
                         <h6>password</h6>
                         <div className='mb-4'>
-                            <Field type="password" name="password" className={`form-control ${props.touched.password && props.errors.password ? 'inp-border' : ''}`} placeholder="Enter Your Password" />
+                            <div className='position-relative'>
+                                <Field type={passwordType} name="password" className={`form-control inputEye ${props.touched.password && props.errors.password ? 'inp-border' : ''}`} placeholder="Enter Your Password" />
+                                <i class="far fa-eye" onClick={OnchangePassword} id="togglePassword"></i>
+                            </div>
                             <ErrorMessage name="password" className='text-danger' component="div" />
                         </div>
                         <div className='d-flex'>
                             <div className='mb-4 me-2 col-3'>
-                                <h6>Age : </h6><Field type="number" className={`form-control ${props.touched.age && props.errors.age ? 'inp-border' : ''}`} name="age" />
+                                <h6>Age : </h6><Field type="number" placeholder='Enter Age' className={`form-control ${props.touched.age && props.errors.age ? 'inp-border' : ''}`} name="age" />
                                 <ErrorMessage name="age" className='text-danger' component="div" />
                             </div>
                             <div className='mb-4 col-9'>

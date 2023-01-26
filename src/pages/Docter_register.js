@@ -2,13 +2,17 @@ import React, { useState } from 'react'
 import { Field, Form, Formik, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 import 'yup-phone'
+import MedicineProduct from '../MedicineData.json'
 
 const Docter_register = () => {
-  const [option, setoption] = useState(0)
-  const handlechange = (event) => {
-    console.log(event);
-    setoption(event.target.value)
-  }
+
+  const [product, setproduct] = useState([
+    {
+      ProdName : '',
+      ProdPrice : 0,
+      prodOption : 0
+    }
+  ])
   
   const validate = yup.object().shape({
     medcine: yup.string(),
@@ -18,43 +22,21 @@ const Docter_register = () => {
     age: yup.number().min(18).max(68).required(),
     phone: yup.string().phone().required(),
     dental: yup.string(),
-    address: yup.string().required(),
+    address: yup.string()
+    .when(['city', 'zipcode', 'country'], {
+        is: (city, zipcode, country) => city !== undefined || zipcode !== null || country !== undefined,
+        then: yup.string().required('requied')
+    }),
     city: yup.string().required(),
-    pincode: yup.number().min(6,"Enter Corect Pincode").max(6,"Enter Corect Pincode").required()
+    pincode: yup.string().matches(/^[0-9]+$/, "Must be only digits").min(6,"Enter Corect Pincode").max(6,"Enter Corect code").required(),
+    payment_method: yup.string().required(),
   })
-
-  const producArr = [
-    {
-      ProductName: '1. Nimeson',
-      ProductValue: 'Nimeson',
-      ProductImg: 'https://cdn01.pharmeasy.in/dam/products/123315/nimeson-tablet-7-1641534931.jpg',
-      ProductPrice: '$20',
-      ProductQuantity: option 
-    },
-    {
-      ProductName: '2. Crestor',
-      ProductValue: 'Crestor',
-      ProductImg: 'https://media.cnn.com/api/v1/images/stellar/prod/161123201756-01-most-prescribed-medications-restricted.jpg?q=w_3000,h_1688,x_0,y_0,c_fill/w_1280',
-      ProductPrice: '$30',
-      ProductQuantity: option
-    },
-    {
-      ProductName: '3. Paracetamol tablets ip',
-      ProductValue: 'Paracetamol tablels',
-      ProductImg: 'https://onemg.gumlet.io/l_watermark_346,w_480,h_480/a_ignore,w_480,h_480,c_fit,q_auto,f_auto/cropped/mu5bahqxfrp28cut6que.jpg',
-      ProductPrice: '$44',
-      ProductQuantity: option
-    }
-  ]
-
-  console.log(producArr);
   
   return (
     <div>
       <h2 className='text-center mb-4'>Product Order</h2>
       <Formik
         initialValues={{
-          medcine: '',
           name: '',
           email : '',
           Gender : '',
@@ -63,11 +45,13 @@ const Docter_register = () => {
           address: '',
           city : '',
           pincode : '',
+          payment_method:'',
+          product
         }}
         validationSchema={validate}
         onSubmit={(values) => {
-          alert(JSON.stringify(values));
-          console.log(values);
+          // alert(JSON.stringify(values));
+          console.log("Submit",values);
         }}
       >
         {(props) => (
@@ -76,29 +60,26 @@ const Docter_register = () => {
             <div className='d-flex justify-content-center my-5'>
               <div className="form-group col-5">
                   <h3>Select Product</h3>
-                    {producArr.map((i) => {
+                    {MedicineProduct.map((i) => {
                       return (
                         <div className='mb-4' key={Math.random()}>
                           <h5>{i.ProductName}</h5>
                           <div className='product-card d-flex align-items-center'>
-                            <Field type='checkbox' name='medcine' value={i.ProductValue} className='me-2' />                    
+                            <Field type='checkbox' name={i.ProductName} className='me-2' />                    
                             <img src={i.ProductImg} width={'200px'} />
                             <p className='mx-2'>Quantity : </p>
-                            <select onChange={handlechange} style={{borderRadius:'5px', padding:'2px 10px', marginBottom:'10px'}}>
-                            <option style={{borderRadius:'5px'}}>Box</option>
-                            <option value={1} style={{borderRadius:'5px'}}>1 Box</option>
-                            <option value={2} style={{borderRadius:'5px'}}>2 Box</option>
-                            <option value={3} style={{borderRadius:'5px'}}>3 Box</option>
-                            <option value={4} style={{borderRadius:'5px'}}>4 Box</option>
-                            <option value={5} style={{borderRadius:'5px'}}>5 Box</option>
-                            <option value={6} style={{borderRadius:'5px'}}>6 Box</option>
-                            </select>
+                            <select className='mb-3'>
+                              {i.option.map((i) => {
+                                return (
+                                    <option key={Math.random()} value={i.value}>{i.lable}</option>
+                                )
+                              })}
+                            </select> 
                             <p className='mx-2'>Price : {i.ProductPrice}</p>
                           </div>
                         </div>
                       )
                     })}
-                    <h5 className='text-end'>Total : </h5>
                   <h6>Name</h6>
                   <div className='mb-4'>
                       <Field type="text" name="name" className={`form-control ${props.touched.name && props.errors.name ? 'inp-border' : ''}`} placeholder="Enter Your Name" />
@@ -136,9 +117,17 @@ const Docter_register = () => {
                           <ErrorMessage name="city" className='text-danger' component="div" />
                       </div>
                       <div className='mb-4 col-6'>
-                          <h6>Pincode No. : </h6><Field type="number" name="pincode" className={`form-control ${props.touched.pincode && props.errors.pincode ? 'inp-border' : ''}`} placeholder='Enter Your Number' />
+                          <h6>Pincode No. : </h6><Field type="number" name="pincode" className={`form-control ${props.touched.pincode && props.errors.pincode ? 'inp-border' : ''}`} placeholder='Enter Your Pincode' />
                           <ErrorMessage name="pincode" className='text-danger' component="div" />
                       </div>
+                  </div>
+                  <div className='mb-4'>
+                      <h6>Payment Method : </h6>
+                      <label className='me-1'>Upi</label><Field type="radio" className='me-3' value='upi' name="payment_method" />
+                      <label className='me-1'>Card</label><Field type="radio" className='me-3' value='card' name="payment_method" />
+                      <label className='me-1'>Online Payment</label><Field type="radio" className='me-3' value='Online Payment' name="payment_method" />
+                      <label className='me-1'>Cash on delivery</label><Field type="radio" className='me-3' value='Cash on delivery' name="payment_method" />
+                      <ErrorMessage name="payment_method" className='text-primary' component="div" />
                   </div>
                   <div className="text-center"><button type="submit" className='appointment-btn'>Send Message</button></div>
               </div>

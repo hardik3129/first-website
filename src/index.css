@@ -34,3 +34,12 @@ a{
   padding: 10px;
   border-radius: 10px;
 }
+.fa-eye {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  font-size: 14px;
+  opacity: 0.5;
+  transform: translateY(-50%);
+}
