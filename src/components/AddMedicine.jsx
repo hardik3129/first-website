@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
@@ -28,7 +27,7 @@ const Add_Medicine = ({ display, setdisplay }) => {
             alert("Data Runing")
         }
 
-        setdisplay(false)
+        handleClose()
     }
     
     return (
@@ -65,14 +64,16 @@ const Add_Medicine = ({ display, setdisplay }) => {
                         name="quantity"
                     />
                 </Form.Group>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="primary" type='submit'>
-                    Save Changes
-                </Button>
-                </Modal.Footer>
+                {/* <Modal.Footer> */}
+                <div className='text-end'>
+                    <button className="btn btn-secondary me-2" onClick={handleClose}>
+                        Close
+                    </button>
+                    <button className="btn btn-primary" type='submit'>
+                        Save Changes
+                    </button>
+                </div>
+                {/* </Modal.Footer> */}
             </Form>
             </Modal.Body>
         </Modal>
