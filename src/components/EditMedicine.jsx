@@ -2,7 +2,8 @@ import React from 'react'
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-const AddMedicine = ({ display, setdisplay }) => {
+const EditMedicine = ({ display, setdisplay, Edit }) => {
+    
 
     const handleClose = () => {
         setdisplay(false)
@@ -11,33 +12,33 @@ const AddMedicine = ({ display, setdisplay }) => {
         event.preventDefault()
         const {target} = event
         const medicineObj = {
-            id : new Date().getTime(),
+            id : Edit.id,
             name : target.name.value,
             price : target.price.value,
             quantity : target.quantity.value
         }
-        
-        if (localStorage.getItem('medicineData')) {
-            let val = JSON.parse(localStorage.getItem('medicineData'))
-            val.push(medicineObj)
-            localStorage.setItem('medicineData',JSON.stringify(val))
-        } else {
-            localStorage.setItem('medicineData',JSON.stringify([medicineObj]))
-        }
-
+        let medData = JSON.parse(localStorage.getItem('medicineData'))
+        const editeddata = medData.map((i) => {
+            if (i.id === Edit.id) {
+                i = medicineObj
+            }
+            return i
+        })
+        localStorage.setItem('medicineData',JSON.stringify(editeddata))
         handleClose()
     }
     
     return (
         <Modal show={display}>
             <Modal.Header closeButton onClick={handleClose}>
-            <Modal.Title>Add Medicine</Modal.Title>
+            <Modal.Title>Edit Medicine</Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <Form onSubmit={OnMedicineAdd}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Medicine Name</Form.Label>
                     <Form.Control
+                        defaultValue={Edit.name}
                         type="text"
                         name="name"
                         placeholder="Enter Medicine Name"
@@ -51,6 +52,7 @@ const AddMedicine = ({ display, setdisplay }) => {
                         rows={3} 
                         name="price"
                         placeholder="Enter Price"
+                        defaultValue={Edit.price}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -60,6 +62,7 @@ const AddMedicine = ({ display, setdisplay }) => {
                         rows={3} 
                         placeholder="Enter Quantity"
                         name="quantity"
+                        defaultValue={Edit.quantity}
                     />
                 </Form.Group>
                 {/* <Modal.Footer> */}
@@ -78,4 +81,4 @@ const AddMedicine = ({ display, setdisplay }) => {
     )
 }
 
-export default AddMedicine
+export default EditMedicine
