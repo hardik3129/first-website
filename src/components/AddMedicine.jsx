@@ -1,9 +1,12 @@
 import React from 'react'
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
 const AddMedicine = ({ display, setdisplay }) => {
 
+    const [ image, setimage] = useState(localStorage.getItem('Profile'))
+    
     const handleClose = () => {
         setdisplay(false)
     }
@@ -27,6 +30,19 @@ const AddMedicine = ({ display, setdisplay }) => {
 
         handleClose()
     }
+
+    const input = document.getElementById("fileToUpload");
+    const reader = new FileReader();
+    reader.onload = () => {
+        const dataURL = reader.result;
+        setimage(localStorage.setItem('Profile', dataURL))
+        // const base64 = reader.result.split(",").pop();
+    }
+    
+    const OnChangeImg = () => {
+        reader.abort();
+        reader.readAsDataURL(input.files[0]);
+    }
     
     return (
         <Modal show={display}>
@@ -35,6 +51,17 @@ const AddMedicine = ({ display, setdisplay }) => {
             </Modal.Header>
             <Modal.Body>
             <Form onSubmit={OnMedicineAdd}>
+                <img src={image} width='300' />
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Medicine Name</Form.Label>
+                    <Form.Control
+                        onChange={OnChangeImg}
+                        type="file"
+                        autoFocus
+                        id='fileToUpload'
+                        multiple={false}
+                    />
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Medicine Name</Form.Label>
                     <Form.Control

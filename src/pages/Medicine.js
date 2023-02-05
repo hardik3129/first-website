@@ -91,6 +91,7 @@ const Medicine = () => {
             }
           </tbody>
         </Table>
+        <img src={localStorage.getItem('Profile')} width='300' />
     </div>
   )
 }
