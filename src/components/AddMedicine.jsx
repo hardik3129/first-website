@@ -31,6 +31,7 @@ const AddMedicine = ({ display, setdisplay }) => {
         handleClose()
     }
 
+    // ================ UPDATE-IMAGE =====================
     const input = document.getElementById("fileToUpload");
     const reader = new FileReader();
     reader.onload = () => {
@@ -38,7 +39,6 @@ const AddMedicine = ({ display, setdisplay }) => {
         setimage(localStorage.setItem('Profile', dataURL))
         // const base64 = reader.result.split(",").pop();
     }
-    
     const OnChangeImg = () => {
         reader.abort();
         reader.readAsDataURL(input.files[0]);
@@ -51,7 +51,7 @@ const AddMedicine = ({ display, setdisplay }) => {
             </Modal.Header>
             <Modal.Body>
             <Form onSubmit={OnMedicineAdd}>
-                <img src={image} width='300' />
+                <img src={localStorage.getItem('Profile')} width='300' />
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Medicine Name</Form.Label>
                     <Form.Control
@@ -59,7 +59,7 @@ const AddMedicine = ({ display, setdisplay }) => {
                         type="file"
                         autoFocus
                         id='fileToUpload'
-                        multiple={false}
+                        // multiple={false}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

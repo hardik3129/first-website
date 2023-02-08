@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import AddMedicine from '../components/AddMedicine'
 import Table from 'react-bootstrap/Table'
 import EditMedicine from '../components/EditMedicine';
+import { useNavigate } from 'react-router';
+
 
 const Medicine = () => {
+    const Navigate = useNavigate()
     const [show, setShow] = useState(false);
     const [Editshow, setEditShow] = useState(false);
     const [MedicineList, setMedicineList] = useState([])
@@ -15,7 +18,7 @@ const Medicine = () => {
     }
     const Editmodalshow = (data) => {
       setEditdata(data)
-      setEditShow(true)
+      Navigate(`/updatemedicine/${data}`)
     }
 
     useEffect(() => {
@@ -83,7 +86,7 @@ const Medicine = () => {
                     <td>{i.quantity}</td>
                     <td>
                       <button className='btn btn-danger me-3' onClick={() => OnClickDelete(i.id)}>Delete</button>
-                      <button className='btn btn-success' onClick={() => Editmodalshow(i)}>Edit</button>
+                      <button className='btn btn-success' onClick={() => Editmodalshow(i.id)}>Edit</button>
                     </td>
                   </tr>
                 )

@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
-const header = () => {
+const Header = () => {
+
+    const Location = useLocation()
+    const [user, setuser] = useState(false)
+
+    useEffect(() => {
+        if (localStorage.getItem('user')) {
+            setuser(true)
+        } else {
+            setuser(false)
+        }   
+    },[Location])
+
+    let OnclickLogout = () => {
+        localStorage.removeItem('user')
+    }
+    
   return (
     <div>
         <div className="main-header">
@@ -32,16 +49,19 @@ const header = () => {
                     <li><Link className="nav-link scrollto active" to="/">Home</Link></li>
                     <li><Link className="nav-link scrollto" to="/departments">Departments</Link></li>
                     <li><Link className="nav-link scrollto" to="/medicine">Medicine</Link></li>
-                    <li><Link className="nav-link scrollto" to={"/contact"}>Contact</Link></li>
-                    <li><Link className="nav-link scrollto" to={'/docRegister'}>Docter Register</Link></li>
+                    <li><Link className="nav-link scrollto" to="/contact">Contact</Link></li>
+                    <li><Link className="nav-link scrollto" to='/docRegister'>Docter Register</Link></li>
                 </ul>
                 <i className="bi bi-list mobile-nav-toggle" />
                 </nav>
                 <Link to='/appoinment' className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                 Appointment</Link>
-                <Link to='/login' className="appointment-btn scrollto">
+                {user === false ? <Link to='/login' className="appointment-btn scrollto">
                 <span className="d-none d-md-inline">Login/ Signup</span>
-                </Link>
+                </Link> : 
+                <Link onClick={OnclickLogout} to="/login" className="appointment-btn scrollto">
+                <span className="d-none d-md-inline">Logout</span>
+                </Link>}
             </div>
             </header>
         </div>
@@ -49,4 +69,4 @@ const header = () => {
   )
 }
 
-export default header
+export default Header
