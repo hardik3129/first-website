@@ -53,6 +53,17 @@ const Medicine = () => {
         localStorage.setItem('medicineData',JSON.stringify(FilterData))
       }
     }
+
+    // ================= SEARCHING =================
+    const OnChangeSearch = (event) =>{
+      const Data = JSON.parse(localStorage.getItem('medicineData'))
+      const filter = Data.filter((i) => i.name.toLowerCase().includes(event.target.value.toLowerCase()))
+      if (!event.target.value) {
+        setMedicineList(Data)
+      } else {
+        setMedicineList(filter)
+      }
+    }
     
   return (
     <div className='my-3 container'>
@@ -63,6 +74,9 @@ const Medicine = () => {
             <button className='btn btn-danger me-3' onClick={BulkDelete}>Bulk Delete</button>
             <button className='btn btn-primary' onClick={modalshow}>Add Medicine</button>
         </div>
+        <div className='text-center mb-3'>
+          <input type='text' className='col-md-6 ' onChange={OnChangeSearch} placeholder='Search' />
+        </div>
         <Table striped bordered hover size="sm">
           <tbody>
             <tr>
@@ -72,6 +86,7 @@ const Medicine = () => {
               <th>Medicine Price</th>
               <th>Medicine Quantity</th>
               <th>Edit / Delete</th>
+              <th>image</th>
             </tr>
             {
               MedicineList.map((i) => {
@@ -87,6 +102,9 @@ const Medicine = () => {
                     <td>
                       <button className='btn btn-danger me-3' onClick={() => OnClickDelete(i.id)}>Delete</button>
                       <button className='btn btn-success' onClick={() => Editmodalshow(i.id)}>Edit</button>
+                    </td>
+                    <td>
+                      <img src={i.img} width='50px' />
                     </td>
                   </tr>
                 )

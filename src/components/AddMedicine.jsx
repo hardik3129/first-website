@@ -17,7 +17,8 @@ const AddMedicine = ({ display, setdisplay }) => {
             id : new Date().getTime(),
             name : target.name.value,
             price : target.price.value,
-            quantity : target.quantity.value
+            quantity : target.quantity.value,
+            img : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png'
         }
         
         if (localStorage.getItem('medicineData')) {
@@ -37,7 +38,6 @@ const AddMedicine = ({ display, setdisplay }) => {
     reader.onload = () => {
         const dataURL = reader.result;
         setimage(localStorage.setItem('Profile', dataURL))
-        // const base64 = reader.result.split(",").pop();
     }
     const OnChangeImg = () => {
         reader.abort();
@@ -45,7 +45,7 @@ const AddMedicine = ({ display, setdisplay }) => {
     }
     
     return (
-        <Modal show={display}>
+        <Modal show={display} size='lg'>
             <Modal.Header closeButton onClick={handleClose}>
             <Modal.Title>Add Medicine</Modal.Title>
             </Modal.Header>
@@ -89,7 +89,6 @@ const AddMedicine = ({ display, setdisplay }) => {
                         name="quantity"
                     />
                 </Form.Group>
-                {/* <Modal.Footer> */}
                 <div className='text-end'>
                     <button className="btn btn-secondary me-2" onClick={handleClose}>
                         Close
@@ -98,7 +97,6 @@ const AddMedicine = ({ display, setdisplay }) => {
                         Save Changes
                     </button>
                 </div>
-                {/* </Modal.Footer> */}
             </Form>
             </Modal.Body>
         </Modal>

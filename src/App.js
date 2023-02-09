@@ -12,6 +12,7 @@ import Medicine from "./pages/Medicine";
 import Signup from './pages/Sginup'
 import PrivetRouting from "./utils/PrivetRouting";
 import UpdateMedicine from "./pages/UpdateMedicine";
+import Patient from "./pages/Patient";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/departments" element={<Head_foot><Departments /></Head_foot>}/>
         <Route path="/medicine" element={<PrivetRouting><Head_foot><Medicine /></Head_foot></PrivetRouting>}/>
         <Route path="/updatemedicine/:id" element={<PrivetRouting><Head_foot><UpdateMedicine /></Head_foot></PrivetRouting>}/>
+        <Route path="/patient" element={<Head_foot><Patient /></Head_foot>}/>
         <Route path="/contact" element={<Head_foot><Context /></Head_foot>}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/appoinment" element={<Head_foot> <Appoinment /> </Head_foot>}/>
