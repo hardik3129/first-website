@@ -11,6 +11,7 @@ const Medicine = () => {
     const [Editshow, setEditShow] = useState(false);
     const [MedicineList, setMedicineList] = useState([])
     const [selectdelete, setselectdelete] = useState([])
+    const [Sorting, setSorting] = useState([])
     const [Editdata, setEditdata] = useState('')
 
     const modalshow = () => {
@@ -23,10 +24,10 @@ const Medicine = () => {
 
     useEffect(() => {
       setMedicineList(JSON.parse(localStorage.getItem('medicineData')) || [])
-    },[show,Editshow,selectdelete])
+    },[show,Editshow,selectdelete,Sorting])
 
     // ================ BULK DELETE ==============
-    const OnClickBulkDelete = (event , value) => {
+    const OnChangeBulkDelete = (event , value) => {
       const {checked} = event.target
       if (checked === true) {
         setselectdelete([...selectdelete,value])
@@ -64,6 +65,19 @@ const Medicine = () => {
         setMedicineList(filter)
       }
     }
+
+    const OnclickTime = () => {
+      const sort = MedicineList.sort((a, b) => b.id - a.id)
+      setSorting(sort)
+      localStorage.setItem('medicineData',JSON.stringify(sort))
+    }
+
+    // ==================== SORTING ==================
+    const OnclickSoring = (byName) =>{
+      const sort = MedicineList.sort((a, b) => a[byName] - b[byName])
+      setSorting(sort)
+      localStorage.setItem('medicineData',JSON.stringify(sort))
+    }
     
   return (
     <div className='my-3 container'>
@@ -83,8 +97,9 @@ const Medicine = () => {
               <th>Select Data</th>
               <th>Id</th>
               <th>Medicine Name</th>
-              <th>Medicine Price</th>
-              <th>Medicine Quantity</th>
+              <th onClick={() => OnclickSoring('price')}>Medicine Price</th>
+              <th onClick={() => OnclickSoring('quantity')}>Medicine Quantity</th>
+              <th onClick={() => OnclickTime()}>last update time</th>
               <th>Edit / Delete</th>
               <th>image</th>
             </tr>
@@ -92,13 +107,15 @@ const Medicine = () => {
               MedicineList.map((i) => {
                 return (
                   <tr className='align-middle' key={Math.random()}>
+                    {console.log(new Date().toLocaleDateString(i.id), )}
                     <td>
-                      <input type='checkbox' checked={selectdelete.includes(i.id)} onClick={(event) => OnClickBulkDelete(event,i.id)} />
+                      <input type='checkbox' checked={selectdelete.includes(i.id)} onClick={(event) => OnChangeBulkDelete(event,i.id)} />
                     </td>
                     <td>{i.id}</td>
                     <td>{i.name}</td>
                     <td>{i.price}</td>
                     <td>{i.quantity}</td>
+                    <td>{new Date(i.id).toLocaleTimeString()}</td>
                     <td>
                       <button className='btn btn-danger me-3' onClick={() => OnClickDelete(i.id)}>Delete</button>
                       <button className='btn btn-success' onClick={() => Editmodalshow(i.id)}>Edit</button>

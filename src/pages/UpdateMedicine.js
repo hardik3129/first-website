@@ -9,6 +9,7 @@ const UpdateMedicine = () => {
     const {id} = useParams()
     const [EditData, setEditdata] = useState()
     
+    console.log(id);
     useEffect(() => {
         const MedData = JSON.parse(localStorage.getItem('medicineData'))
         const filter = MedData.find((i) => i.id === Number(id))
