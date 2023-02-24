@@ -3,6 +3,7 @@ import AddMedicine from '../components/AddMedicine'
 import Table from 'react-bootstrap/Table'
 import EditMedicine from '../components/EditMedicine';
 import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 
 const Medicine = () => {
@@ -13,7 +14,9 @@ const Medicine = () => {
     const [selectdelete, setselectdelete] = useState([])
     const [Sorting, setSorting] = useState([])
     const [Editdata, setEditdata] = useState('')
+    const Data = useSelector((data) => data.appdata.ContactData)
 
+    console.info("menu", Data)
     const modalshow = () => {
         setShow(true)
     }
@@ -73,11 +76,20 @@ const Medicine = () => {
     }
 
     // ==================== SORTING ==================
-    const OnclickSoring = (byName) =>{
+    const OnclickSorting = (byName) =>{
       const sort = MedicineList.sort((a, b) => a[byName] - b[byName])
       setSorting(sort)
       localStorage.setItem('medicineData',JSON.stringify(sort))
     }
+    const OnclickSortingName = () =>{
+      const sort = MedicineList.sort((a, b) => a.name.localeCompare(b.name))
+      setSorting(sort)
+      localStorage.setItem('medicineData',JSON.stringify(sort))
+    }
+
+    // ============================== REDUX PROGRAM ==========================
+
+
     
   return (
     <div className='my-3 container'>
@@ -91,14 +103,14 @@ const Medicine = () => {
         <div className='text-center mb-3'>
           <input type='text' className='col-md-6 ' onChange={OnChangeSearch} placeholder='Search' />
         </div>
-        <Table striped bordered hover size="sm">
+        {/* <Table striped bordered hover size="sm">
           <tbody>
             <tr>
               <th>Select Data</th>
               <th>Id</th>
-              <th>Medicine Name</th>
-              <th onClick={() => OnclickSoring('price')}>Medicine Price</th>
-              <th onClick={() => OnclickSoring('quantity')}>Medicine Quantity</th>
+              <th onClick={() => OnclickSortingName()}>Medicine Name</th>
+              <th onClick={() => OnclickSorting('price')}>Medicine Price</th>
+              <th onClick={() => OnclickSorting('quantity')}>Medicine Quantity</th>
               <th onClick={() => OnclickTime()}>last update time</th>
               <th>Edit / Delete</th>
               <th>image</th>
@@ -107,7 +119,6 @@ const Medicine = () => {
               MedicineList.map((i) => {
                 return (
                   <tr className='align-middle' key={Math.random()}>
-                    {console.log(new Date().toLocaleDateString(i.id), )}
                     <td>
                       <input type='checkbox' checked={selectdelete.includes(i.id)} onClick={(event) => OnChangeBulkDelete(event,i.id)} />
                     </td>
@@ -128,8 +139,43 @@ const Medicine = () => {
               })
             }
           </tbody>
-        </Table>
+        </Table> */}
         <img src={localStorage.getItem('Profile')} width='300' />
+          <h3 className='text-center fw-bold'>Contact info Table</h3>
+          <div className='text-center mb-3'>
+            <input type='text' className='col-md-6 ' onChange={OnChangeSearch} placeholder='Search' />
+          </div>
+          <Table striped bordered hover size="sm">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Delete</th>
+                <th>Edit</th>
+              </tr>
+              {
+                Data?.map((i) => {
+                  return (
+                    <tr className='align-middle' key={Math.random()}>
+                      <td>{i.name}</td>
+                      <td>{i.message}</td>
+                      <td>{i.subject}</td>
+                      <td>{i.email}</td>
+                      <td>
+                        <button className='btn btn-danger me-3'>Delete</button>
+                      </td>
+                      <td>
+                        <button className='btn btn-success'>Edit</button>
+                      </td>
+                    </tr>
+                  )
+                })
+              }
+            </tbody>
+          </Table>
+          <img src={localStorage.getItem('Profile')} width='300' />
     </div>
   )
 }

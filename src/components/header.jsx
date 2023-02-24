@@ -50,8 +50,13 @@ const Header = () => {
                     <li><Link className="nav-link scrollto" to="/datatable">Data Table</Link></li>
                     <li><Link className="nav-link scrollto" to="/menuledatatable">Manualy Data Table</Link></li>
                     <li><Link className="nav-link scrollto" to="/medicine">Medicine</Link></li>
-                    <li><Link className="nav-link scrollto" to="/patient">Patient</Link></li>
-                    <li><Link className="nav-link scrollto" to="/contact">Contact</Link></li>
+                    <li>
+                        {
+                            JSON.parse(localStorage.getItem('user'))?.role === 'admin' ? <Link className="nav-link scrollto" to="/patient">Patient</Link> : 
+                            <Link className="nav-link scrollto" to="/contact">Promice Api</Link>
+                        }
+                    </li>
+                    {/* <li></li> */}
                     <li><Link className="nav-link scrollto" to='/docRegister'>Docter Register</Link></li>
                 </ul>
                 <i className="bi bi-list mobile-nav-toggle" />

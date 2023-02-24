@@ -19,7 +19,14 @@ const Login = () => {
         initialValues={{ email:'', password:''}}
         validationSchema={validate}
         onSubmit = {(value) => {
-            localStorage.setItem('user',JSON.stringify(value))
+            let logindata = value
+            console.log(logindata);
+            if (logindata.email == 'admin@gmail.com') {
+                logindata = {...value, role : 'admin'}
+            } else {
+                logindata = {...value, role : 'user'}
+            }
+            localStorage.setItem('user',JSON.stringify(logindata))
             navigate('/')
         }}
     >
