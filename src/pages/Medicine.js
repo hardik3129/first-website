@@ -4,9 +4,12 @@ import Table from 'react-bootstrap/Table'
 import EditMedicine from '../components/EditMedicine';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { DeleteContactData } from '../redux/action/Contact.action';
 
 
 const Medicine = () => {
+    const Dispatch = useDispatch()
     const Navigate = useNavigate()
     const [show, setShow] = useState(false);
     const [Editshow, setEditShow] = useState(false);
@@ -14,9 +17,8 @@ const Medicine = () => {
     const [selectdelete, setselectdelete] = useState([])
     const [Sorting, setSorting] = useState([])
     const [Editdata, setEditdata] = useState('')
-    const Data = useSelector((data) => data.appdata.ContactData)
+    const Data = useSelector((data) => data.Contactreduser.ContactData) //----- GET DATA from Redux Store by Provider -----
 
-    console.info("menu", Data)
     const modalshow = () => {
         setShow(true)
     }
@@ -88,7 +90,12 @@ const Medicine = () => {
     }
 
     // ============================== REDUX PROGRAM ==========================
-
+    const onClickReduxDelete = (id) => {
+      Dispatch(DeleteContactData(id))
+    }
+    const onClickReduxEdit = (id) => {
+      Navigate(`/contact/${id}`)
+    }
 
     
   return (
@@ -103,7 +110,7 @@ const Medicine = () => {
         <div className='text-center mb-3'>
           <input type='text' className='col-md-6 ' onChange={OnChangeSearch} placeholder='Search' />
         </div>
-        {/* <Table striped bordered hover size="sm">
+        <Table striped bordered hover size="sm">
           <tbody>
             <tr>
               <th>Select Data</th>
@@ -139,7 +146,7 @@ const Medicine = () => {
               })
             }
           </tbody>
-        </Table> */}
+        </Table> 
         <img src={localStorage.getItem('Profile')} width='300' />
           <h3 className='text-center fw-bold'>Contact info Table</h3>
           <div className='text-center mb-3'>
@@ -148,6 +155,7 @@ const Medicine = () => {
           <Table striped bordered hover size="sm">
             <tbody>
               <tr>
+                <th>Id</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Subject</th>
@@ -159,15 +167,16 @@ const Medicine = () => {
                 Data?.map((i) => {
                   return (
                     <tr className='align-middle' key={Math.random()}>
+                      <td>{i.id}</td>
                       <td>{i.name}</td>
-                      <td>{i.message}</td>
-                      <td>{i.subject}</td>
                       <td>{i.email}</td>
+                      <td>{i.subject}</td>
+                      <td>{i.message}</td>
                       <td>
-                        <button className='btn btn-danger me-3'>Delete</button>
+                        <button className='btn btn-danger me-3' onClick={() => onClickReduxDelete(i.id)}>Delete</button>
                       </td>
                       <td>
-                        <button className='btn btn-success'>Edit</button>
+                        <button className='btn btn-success' onClick={() => onClickReduxEdit(i.id)}>Edit</button>
                       </td>
                     </tr>
                   )

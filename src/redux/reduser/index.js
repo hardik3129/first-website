@@ -1,8 +1,8 @@
 import { combineReducers } from "redux"
-import appdata from "../reduser/Contact.reduser" 
+import Contactreduser from "../reduser/Contact.reduser" 
 
 const rootReduser = combineReducers({
-    appdata
+    Contactreduser
 })
 
 export default rootReduser;

@@ -1,34 +1,57 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
-import Contactaction from "../redux/action/Contact.action";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { Contactaction, editCotact } from "../redux/action/Contact.action";
 
 const PromiceApi = () => {
 
   const dispatch = useDispatch()
   const navigator = useNavigate()
+  const {id} = useParams()
+  const [values, setValues] = useState()
+  const val = useSelector((data) => data.Contactreduser.ContactData) 
   
   const Promice = fetch("https://randomuser.me/api/");
   
-  Promice.then(response => response.json())
-  .then(json => 
-    console.log(json)
-  )
+  // Promice.then(response => response.json())
+  // .then(json => 
+  //   console.log("json data",json)
+  // )
+
+  useEffect(() => {
+    const filter = val.find((i) => i.id == id)
+    if(id) {
+      setValues(filter)
+    }
+  },[])
+  
   const OnSubmitData = (event) => {
     event.preventDefault()
-    const obj = {
-      id : new Date().getTime(),
-      name : event.target.name.value,
-      email : event.target.email.value,
-      subject : event.target.subject.value,
-      message : event.target.message.value,
+    if (id) {
+      const obj = {
+        id : id,
+        name : event.target.name.value,
+        email : event.target.email.value,
+        subject : event.target.subject.value,
+        message : event.target.message.value,
+      }
+      
+      dispatch(editCotact(obj));
+    } else {
+      const obj = {
+        id : new Date().getTime(),
+        name : event.target.name.value,
+        email : event.target.email.value,
+        subject : event.target.subject.value,
+        message : event.target.message.value,
+      }
+      
+      dispatch(Contactaction(obj));
     }
-    
-    console.log('obj',obj)
-    dispatch({type : "ADDCONTACT" , payload : obj});
 
     navigator('/medicine')
   }
+  console.log("val :- ",val);
 
   return (
     <div>
@@ -47,17 +70,17 @@ const PromiceApi = () => {
                     <form className="php-email-form" onSubmit={OnSubmitData}>
                         <div className="row">
                         <div className="col-md-6 form-group">
-                            <input type="text" name="name" className="form-control" placeholder="Your Name" />
+                            <input defaultValue={values?.name} type="text" name="name" className="form-control" placeholder="Your Name" />
                         </div>
                         <div className="col-md-6 form-group mt-3 mt-md-0">
-                            <input type="email" className="form-control" name="email" placeholder="Your Email" />
+                            <input defaultValue={values?.email} type="email" className="form-control" name="email" placeholder="Your Email" />
                         </div>
                         </div>
                         <div className="form-group mt-3">
-                        <input type="text" className="form-control" name="subject" placeholder="Subject" />
+                        <input defaultValue={values?.subject} type="text" className="form-control" name="subject" placeholder="Subject" />
                         </div>
                         <div className="form-group mt-3">
-                        <textarea className="form-control" name="message" rows={5} placeholder="Message" defaultValue={""} />
+                        <textarea defaultValue={values?.message} className="form-control" name="message" rows={5} placeholder="Message"/>
                         </div>
                         <div className="my-3">
                         <div className="loading">Loading</div>

@@ -27,6 +27,7 @@ function App() {
         <Route path="/updatemedicine/:id" element={<PrivetRouting><Head_foot><UpdateMedicine /></Head_foot></PrivetRouting>}/>
         <Route path="/patient" element={<AdminRouting><Head_foot><Patient /></Head_foot></AdminRouting>}/>
         <Route path="/contact" element={<Head_foot><Contact /></Head_foot>}/>
+        <Route path="/contact/:id" element={<Head_foot><Contact /></Head_foot>}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/appoinment" element={<Head_foot> <Appoinment /> </Head_foot>}/>
         <Route path="/docRegister" element={<Head_foot> <Docter_register /> </Head_foot>}/>

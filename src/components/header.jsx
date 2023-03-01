@@ -53,7 +53,7 @@ const Header = () => {
                     <li>
                         {
                             JSON.parse(localStorage.getItem('user'))?.role === 'admin' ? <Link className="nav-link scrollto" to="/patient">Patient</Link> : 
-                            <Link className="nav-link scrollto" to="/contact">Promice Api</Link>
+                            <Link className="nav-link scrollto" to="/contact">Contact</Link>
                         }
                     </li>
                     {/* <li></li> */}
