@@ -2,6 +2,7 @@ import { Field, Form, Formik, ErrorMessage } from 'formik'
 import React, { useState } from 'react'
 import * as yup from 'yup'
 import 'yup-phone'
+import MultiCheckboxValidate from './multyCheckboxValidate'
 
 const Login = () => {
 
@@ -26,6 +27,8 @@ const Login = () => {
     
   return (
     // ========================= LOGIN =========================
+    <>
+    <MultiCheckboxValidate />
     <Formik
         initialValues={{ email:'', password:'', age:'', phone:'', Gender:'', hobby:''}}
         validationSchema={validate}
@@ -80,6 +83,7 @@ const Login = () => {
             </Form>
         )}
     </Formik>
+    </>
   )
 }
 

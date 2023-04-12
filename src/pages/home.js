@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react'
-import "../App.css"
+import React, { useState, useRef, useEffect } from 'react'
 
 const Home = () => {
     const [ data, setdata ] = useState()
@@ -14,6 +13,30 @@ const Home = () => {
         console.log("state hook : ",data);
         console.log(Refrens.current.placeholder);
     }
+
+    // =========================== PETTERN =====================
+    let n = 5;
+    let string = '';
+    let [string1, setstring1] = useState('')
+    useEffect(() => {
+        for(let i = 0; i <= n; i++) {
+            for (let j = 0; j <= n; j++) {
+                if (i === 0 || i === n) {
+                    string += '*'
+                } else {
+                    if (j === 0 || j === n) {
+                        string += '*'
+                    } else {
+                        string += ' '
+                    }
+                }
+            }
+            string += "\n"
+            setstring1(string1 += '\n')
+        }
+        console.log(string);
+        // console.log(string1);
+    },[])
     
   return (
     <div>

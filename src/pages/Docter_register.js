@@ -13,6 +13,12 @@ const Docter_register = () => {
       prodOption : 0
     }
   ])
+
+  const productQun = (event) => {
+    setproduct({
+      prodOption : event  
+    })
+  }
   
   const validate = yup.object().shape({
     medcine: yup.string(),
@@ -68,7 +74,7 @@ const Docter_register = () => {
                             <Field type='checkbox' name={i.ProductName} className='me-2' />                    
                             <img src={i.ProductImg} width={'200px'} />
                             <p className='mx-2'>Quantity : </p>
-                            <select className='mb-3'>
+                            <select className='mb-3' onChange={(event) => productQun(event.target.value)}>
                               {i.option.map((i) => {
                                 return (
                                     <option key={Math.random()} value={i.value}>{i.lable}</option>
