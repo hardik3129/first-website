@@ -1,47 +1,24 @@
-import { useState } from 'react';
-import './App.css';
+import React from "react";
+import { Route, Routes } from 'react-router-dom'
+import Home from "./pages/home"
+import Departments from "./pages/departments";
+import Head_foot from './layouts/header_footer'
+import Contact from "./pages/contact";
+import Login from "./pages/Login";
+import Appoinment from "./pages/Appoinment";
+import Docter_register from "./pages/Docter_register";
 
 function App() {
-  const emp = [
-    {
-      name : "hardik1",
-      email : "hardik1@gmail.com"
-    },
-    {
-      name : "mayur2",
-      email : "mayur2@gmail.com"
-    },
-    {
-      name : "milan3",
-      email : "milan3@gmail.com"
-    }
-  ]
-
-  const [student, setStudent] = useState(emp);
-
-  let onClickChange = () => {
-    let data = student.map((i,ind) => {
-      if (ind === 0) {
-        i.name = i.name ? "blank" : "hardik"
-      }
-      return i
-    })
-    console.log(data);
-    setStudent(data);
-  }
 
   return (
-      <div className='App'>
-        hooks
-        {
-          student.map((i) => {
-            return (
-              <p key={Math.random()}>name is {i.name}</p>
-            )
-          })
-        }
-        <button onClick={onClickChange}>Change</button>
-      </div>
+      <Routes>
+        <Route path="/" element={<Head_foot><Home /></Head_foot>}/>
+        <Route path="/departments" element={<Head_foot><Departments /></Head_foot>}/>
+        <Route path="/contact" element={<Head_foot><Contact /></Head_foot>}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/appoinment" element={<Head_foot> <Appoinment /> </Head_foot>}/>
+        <Route path="/docRegister" element={<Head_foot> <Docter_register /> </Head_foot>}/>
+      </Routes>
   )
 }
 

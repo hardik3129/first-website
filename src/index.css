@@ -11,3 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.inp-border {
+  border-color: #dc3545 !important;
+}
+
+input::-webkit-inner-spin-button{
+  appearance: none;
+}
+
+input::placeholder{
+  font-size: 14px;
+}
+button{
+  border: none;
+}
+a{
+  text-decoration: none !important;
+}
+.product-card {
+  border: 1px solid #dce0ea;
+  padding: 10px;
+  border-radius: 10px;
+}
+.fa-eye {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  font-size: 14px;
+  opacity: 0.5;
+  transform: translateY(-50%);
+}
